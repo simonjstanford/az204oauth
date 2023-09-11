@@ -20,6 +20,13 @@ namespace OAuthTest
             builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddRazorPages();
 
+            builder.Services.AddAuthentication()
+               .AddGoogle(options =>
+               {
+                   options.ClientId = Environment.GetEnvironmentVariable("ClientId")!;
+                   options.ClientSecret = Environment.GetEnvironmentVariable("ClientSecret")!;
+               });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
